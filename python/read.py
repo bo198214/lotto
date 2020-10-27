@@ -286,7 +286,7 @@ min_ratios = [1000, 1000, 1000, 1000]
 JP = 0
 jp_accu = 1
 for year in range(1955,2013):
-    with open('/Users/htrappmann/Public/lotto/data/' + str(year) + '.csv') as f:
+    with open('../data/lotto-hessen.de/6aus49/' + str(year) + '.csv') as f:
         r = csv.reader(f, delimiter=';')
         found_start = False
         for row in r:
@@ -374,7 +374,7 @@ for year in range(1955,2013):
             prev_row = row
             prev_category_hits = category_hits
 
-with open('/Users/htrappmann/Public/lotto/data/2015-2020.txt') as f:
+with open('../data/lotto-hessen.de/6aus49/2015-2020.txt') as f:
     r = csv.reader(f, delimiter="\t")
     first_row = True
     for row in r:
