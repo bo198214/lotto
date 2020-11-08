@@ -3,6 +3,8 @@ import re
 import csv
 from math import floor, fabs
 
+from lotto import times2int, german_price2float, month_day
+
 parser = argparse.ArgumentParser(description='Read Lotto Numbers from year')
 
 # parser.add_argument('year', help='The year of the data')
@@ -15,26 +17,6 @@ cardinal_pattern = re.compile("\d+\.")
 def time_out():
     return "%4d-%02d-%02d" % (year, month, day)
 
-
-def times2int(times):
-    times = times.replace(" ","")
-    if times == '':
-        return 0
-    if times == "JP" or times == "unbesetzt" or times == "entfällt" or times == "Jackpot":
-        return 0
-    else:
-        if year < 1992:
-            assert "x" in times, times
-        try:
-            return float(times.replace("x", "").replace(".",""))
-        except:
-            raise Exception(times)
-
-
-def german_price2float(price):
-    if price == '':
-        return 0
-    return float(price.replace(".", "").replace(",", "."))
 
 
 def print_tippschein(numbers):
@@ -310,9 +292,7 @@ for year in range(1955,2013):
                 ziehung = week_str
 
             day_month_str = row[1]
-            day_month = [int(i) for i in day_month_str.split(".")[0:2]]
-            day = day_month[0]
-            month = day_month[1]
+            month,day = month_day(day_month_str)
             zusatz_zahl = row[8]
 
             drawn_numbers = [int(i) for i in drawn_numbers]
@@ -354,6 +334,8 @@ for year in range(1955,2013):
                     break
             assert len(categories) % 2 == 0, str(year) + ":" + str(day_month_str) + ":" + str(categories) + "sei: " + str(sei)
             for i in range(int(len(categories)/2)):
+                if year < 1992:
+                    assert "x" in categories[2*i], categories[2*i]
                 categories[2*i] = times2int(categories[2*i])
                 categories[2*i+1] = german_price2float(categories[2*i+1])
             category_hits = [categories[2*i] for i in range(int(len(categories)/2))]
