@@ -110,25 +110,25 @@ def process():
     global JP
     global jp_accu
     if (year, month, day) >= (2020, 9, 23):
-        price = 1.2
+        single_spiel_einsatz = 1.2
     elif (year, week) >= (2013, 18):  # ?ab 4. Mai
-        price = 1.0
+        single_spiel_einsatz = 1.0
     elif year >= 2002:
-        price = 0.75  # EUR
+        single_spiel_einsatz = 0.75  # EUR
     elif (year, week) >= (1999, 20):  # ?
-        price = 1.5
+        single_spiel_einsatz = 1.5
     elif (year, month, day) >= (1991, 12, 14):
-        price = 1.25  # DM
+        single_spiel_einsatz = 1.25  # DM
     elif (year, week) >= (1984, 18):  # nach 28.4.?
-        price = 1.0  # DM
+        single_spiel_einsatz = 1.0  # DM
     elif (year, week) >= (1981, 27):
-        price = 0.5
+        single_spiel_einsatz = 0.5
     else:
-        price = 0.5  # DM
+        single_spiel_einsatz = 0.5  # DM
 
-    teilnehmer = spiel_einsatz / price
+    teilnehmer = spiel_einsatz / single_spiel_einsatz
     if not teilnehmer-floor(teilnehmer) < 0.0000001:
-        print("Warning:",time_out(), str(spiel_einsatz) + "/" + str(price) + "=" + str(teilnehmer))
+        print("Warning:",time_out(), str(spiel_einsatz) + "/" + str(single_spiel_einsatz) + "=" + str(teilnehmer))
 
     auszahlungen = sum([category_hits[i] * category_single_pay[i] for i in range(len(categories) // 2)])
 
