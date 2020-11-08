@@ -58,6 +58,13 @@ for year in range(2012,2018):
                 cat_single_pay[j] * cat_hits[j] - cat_gewinn_ausschuettung[j] for j in range(12)]
             current_accu = [ current_accu[j] + 1 for j in range(12)]
 
+            #20.15
+            if  last_booster_fond > 20000000:
+                d = last_booster_fond - 20000000
+                cat_jackpot[0] += d
+                booster_fond   -= d
+                #print(f"Transferred {d} to current jackpot")
+
             #20.10
             #20.14
             if  cat_jackpot[0]   < 10000000:
@@ -80,13 +87,6 @@ for year in range(2012,2018):
                             break
                     cat_jackpot[j] += cat_jackpot[0]
                     cat_jackpot[0] = 0
-
-            #20.15
-            if  cat_hits[0] > 0 and last_booster_fond > 20000000:
-                d = last_booster_fond - 20000000
-                cat_jackpot[0] += d
-                booster_fond   -= d
-                print(f"Transferred {d} to current jackpot")
 
 
             for j in range(12):
