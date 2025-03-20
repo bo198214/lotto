@@ -1,5 +1,7 @@
-for n in {12..21}
+#!/bin/bash
+
+for n in {13..22}
 do 
-  echo $n | eatthepie ticket-history | tail +4 > lotteries/$n.py
-  echo $n | eatthepie game-info | tail +6 > lotteries/$n.json
+  eatthepie ticket-history $n > lotteries/ticket-history-$n.json
+  eatthepie game-info      $n > lotteries/game-info-$n.json
 done
